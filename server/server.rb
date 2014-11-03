@@ -40,6 +40,12 @@ post '/users' do
   response.status = 201
 end
 
+delete '/users/:id' do
+  users.delete_if { |user| user[:id] == params[:id].to_i}
+  
+  204
+end
+
 get '/broken' do
   500
 end
