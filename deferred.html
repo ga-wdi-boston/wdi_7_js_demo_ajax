@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Deferred Objects</title>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script src="lib/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+
+var deferred = $.Deferred();
+
+deferred.done(function(val) {
+    console.log('done', val);
+});
+
+deferred.fail(function(val) {
+    console.log('fails', val);
+});
+
+deferred.always(function(val) {
+    console.log('always', val);
+});
+
+setTimeout(function() {
+    deferred.resolve('Hi');
+}, 2000);
+
+// setTimeout(function() {
+//     deferred.reject('Hi');
+// }, 2000);
+
+// function slow() {
+//     var deferred = $.Deferred();
+//
+//     setTimeout(function() {
+//         deferred.resolve('slow is done');
+//     }, 1000);
+//
+//     return deferred;
+// }
+//
+// function reallySlow() {
+//     var deferred = $.Deferred();
+//
+//     setTimeout(function() {
+//         deferred.resolve('really slow is done');
+//     }, 2000);
+//
+//     return deferred;
+// }
+//
+// $.when(slow(), reallySlow()).done(function(slow, reallySlow) {
+//    console.log(arguments);
+// });
+
+// function slow(howSlow) {
+//     var deferred = $.Deferred();
+//
+//     setTimeout(function() {
+//         deferred.resolve(2000);
+//     }, howSlow);
+//
+//     return deferred;
+// }
+//
+// function reallySlow(howSlow) {
+//     var deferred = $.Deferred();
+//
+//     setTimeout(function() {
+//         deferred.resolve(4000);
+//     }, howSlow);
+//
+//     return deferred;
+// }
+//
+// function reallyReallySlow(howSlow) {
+//     var deferred = $.Deferred();
+//
+//     setTimeout(function() {
+//         deferred.resolve('really really slow is done');
+//     }, howSlow);
+//
+//     return deferred;
+// }
+//
+// slow(1000).then(function(val) {
+//     return reallySlow(val);
+// }).then(function(val) {
+//     return reallyReallySlow(val);
+// }).then(function(val) {
+//     console.log(val);
+// });
+
+</script>
+
+</body>
+</html>

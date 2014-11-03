@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Demo 1</title>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script src="lib/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+
+$('#container').load('server/users.html');
+
+// function buildUserList(users) {
+//     var userList = $('<ul>');
+//
+//     $.each(users, function(index, item) {
+//         $('<li>').text(item.name).appendTo(userList);
+//     });
+//
+//     return userList;
+// }
+//
+// $.get('http://localhost:4567/users')
+// .done(function(response) {
+//     $('#container').html(buildUserList(response));
+// })
+// .fail(function(jqXHR, textStatus, errorThrown) {
+//    $('#container').html(jqXHR.responseText);
+// });
+
+// $.ajax({
+//     url: 'http://localhost:4567/users',
+//     type: 'GET'
+// }).done(function(response) {
+//     $('#container').html(buildUserList(response));
+// })
+// .fail(function(jqXHR, textStatus, errorThrown) {
+//    $('#container').html(jqXHR.responseText);
+// });
+
+</script>
+
+</body>
+</html>
