@@ -32,6 +32,12 @@ get '/users' do
   users.to_json
 end
 
+get '/users/:id' do
+  users = users.select { |user| user[:id] == params[:id].to_i}
+  
+  users.to_json
+end
+
 post '/users' do
   user = JSON.parse(request.env['rack.input'].read)
 

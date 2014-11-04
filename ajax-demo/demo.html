@@ -11,7 +11,7 @@
 <script src="lib/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
 
-$('#container').load('server/users.html');
+// $('#container').load('server/users.html');
 
 // add an event to alert each name in the list
 // $('#container').on('click', '.js-users a', function(e) {
@@ -20,22 +20,22 @@ $('#container').load('server/users.html');
 //     alert($(this).text());
 // });
 
-// function buildUserList(users) {
-//     var userList = $('<ul>');
-//
-//     $.each(users, function(index, item) {
-//         $('<li>').text(item.name).appendTo(userList);
-//     });
-//
-//     return userList;
-// }
-//
-// $.get('http://localhost:4567/users')
+function buildUserList(users) {
+    var userList = $('<ul>');
+
+    $.each(users, function(index, item) {
+        $('<li>').text(item.name).appendTo(userList);
+    });
+
+    return userList;
+}
+
+// $.get('http://localhost:4567/users/1')
 // .done(function(response) {
 //     $('#container').html(buildUserList(response));
 // })
 // .fail(function(jqXHR, textStatus, errorThrown) {
-//    $('#container').html(jqXHR.responseText);
+//     $('#container').html(jqXHR.responseText);
 // });
 
 // $.ajax({
@@ -52,17 +52,15 @@ $('#container').load('server/users.html');
 //     id: 4,
 //     name: 'Jorden'
 // };
-//
-// $.ajax({
-//     url: 'http://localhost:4567/users',
-//     type: 'POST',
-//     dataType: 'json',
-//     data: JSON.stringify(user)
-// }).done(function(response) {
-//     console.log(response);
-// });
 
-// $.post('http://localhost:4567/users', JSON.stringify(user)).success(function(response) {
+$.ajax({
+    url: 'http://localhost:4567/users/3',
+    type: 'DELETE'
+}).done(function(response) {
+    console.log(response);
+});
+
+// $.post('http://localhost:4567/users', JSON.stringify(user)).done(function(response) {
 //     console.log(response);
 // });
 
