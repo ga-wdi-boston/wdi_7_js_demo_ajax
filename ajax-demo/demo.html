@@ -48,13 +48,22 @@ function buildUserList(users) {
 //    $('#container').html(jqXHR.responseText);
 // });
 
-// var user = {
-//     id: 4,
-//     name: 'Jorden'
-// };
-
+var user = {
+    id: 4,
+    name: 'Jorden'
+};
+//
+// $.ajax({
+//     url: 'http://localhost:4567/users',
+//     type: 'POST',
+//     dataType: 'json',
+//     data: JSON.stringify(user)
+// }).done(function(response) {
+//     console.log(response);
+// });
+//
 $.ajax({
-    url: 'http://localhost:4567/users/3',
+    url: 'http://localhost:4567/users/4',
     type: 'DELETE'
 }).done(function(response) {
     console.log(response);

@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'json'
+require 'pry'
 
 # store users in memory
 users = [
@@ -40,7 +41,10 @@ end
 
 post '/users' do
   user = JSON.parse(request.env['rack.input'].read)
-
+  
+  # convert string keys to symbols
+  Hash[user.map{|(k,v)| [k.to_sym,v]}]
+  
   users << user
 
   response['Location'] = "/users/#{user['id']}"
@@ -49,7 +53,9 @@ post '/users' do
 end
 
 delete '/users/:id' do
-  users.delete_if { |user| user[:id] == params[:id].to_i}
+  # binding.pry
+  
+  users.delete_if { |user| user[:id].to_i == params[:id].to_i}
 
   204
 end
