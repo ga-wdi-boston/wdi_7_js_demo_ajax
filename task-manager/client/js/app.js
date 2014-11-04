@@ -11,11 +11,12 @@ taskManager.createCategory = function(category) {
     var categoryField = $('select[name="category"]');
     
     $('<option>').val(category).text(category).appendTo(categoryField);
+    
     categoryField.val(category);
 };
  
 taskManager.createTask = function(task, category) {
-    if (category === '' || category === '') {
+    if (task === '' || category === '') {
         return;
     }
     
