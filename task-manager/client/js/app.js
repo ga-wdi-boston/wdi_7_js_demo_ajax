@@ -3,16 +3,58 @@
 var taskManager = {};
 
 // helpers
+taskManager.fetchCategories = function() {
+    $.ajax({
+        url: 'http://localhost:3000/categories',
+        type: 'GET'
+    }).done(function(response) {
+        taskManager.buildCategorySelect(response);
+    });
+};
+
+taskManager.fetchTasks = function() {
+    $.ajax({
+        url: 'http://localhost:3000/tasks',
+        type: 'GET'
+    }).done(function(response) {
+        taskManager.buildTaskList(response);
+    });
+};
+
+taskManager.buildCategorySelect = function(categories) {
+    $.each(categories, function(index, item) {
+        var option = $('<option value="'+item.id+'">'+item.name+'</option>');
+        
+        $('select[name="category"]').append(option);
+    });
+};
+
+taskManager.buildTaskList = function(tasks) {
+    $.each(tasks, function(index, item) {
+        var li = $('<li data-id="'+item.id+'" data-status="'+this.status+'"><a href="#">'+item.name+'</li>');
+        
+        $('.js-taskList ul').append(li);
+    });
+};
+
 taskManager.createCategory = function(category) {
     if (category === '') {
         return;
     }
     
-    var categoryField = $('select[name="category"]');
-    
-    $('<option>').val(category).text(category).appendTo(categoryField);
-    
-    categoryField.val(category);
+    $.ajax({
+        url: 'http://localhost:3000/categories',
+        type: 'POST',
+        data: JSON.stringify({
+            name: category
+        })
+    }).done(function(response) {
+        var categoryField = $('select[name="category"]');
+        
+        $('<option>').val(category).text(category).appendTo(categoryField);
+        
+        categoryField.val(category);
+    });
 };
  
 taskManager.createTask = function(task, category) {
@@ -20,8 +62,17 @@ taskManager.createTask = function(task, category) {
         return;
     }
     
-    var item = $('<a>').attr('href', '#').text(task).wrap('<li>');
-    item.appendTo('.js-taskList ul').hide().fadeIn();
+    $.ajax({
+        url: 'http://localhost:3000/tasks',
+        type: 'POST',
+        data: JSON.stringify({
+            name: task,
+            category: category
+        })
+    }).done(function(response) {
+        var li = $('<li data-id="'+response.id+'" data-status="'+response.status+'"><a href="#">'+response.name+'</li>');
+        li.appendTo('.js-taskList ul').hide().fadeIn();
+    });
 };
 
 // event actions
@@ -50,14 +101,38 @@ taskManager.submitTaskForm = function(e) {
 taskManager.clickTaskItem = function(e) {
     e.preventDefault();
     
-    $(e.target).toggleClass('completed');
+    var eventContext = this;
+    
+    var id = $(this).parent().attr('data-id');
+    var status = ($(this).parent().attr('data-status') === '2') ? 0 : 2;
+    
+    $.ajax({
+        url: 'http://localhost:3000/tasks/' + id,
+        type: 'PUT',
+        data: JSON.stringify({
+            status: status
+        })
+    }).done(function(response) {
+        $(eventContext).parent().attr('data-status', status);
+    });
 };
 
 taskManager.clickRemoveCompleted = function(e) {
     e.preventDefault();
     
-    $('.js-taskList ul a.completed').parent().fadeOut(function() {
-        $(this).remove();
+    $('.js-taskList ul li[data-status="2"]').each(function() {
+        var iteratorContext = this;
+        
+        var id = $(iteratorContext).attr('data-id');
+        
+        $.ajax({
+            url: 'http://localhost:3000/tasks/' + id,
+            type: 'DELETE'
+        }).done(function(response) {
+            $(iteratorContext).fadeOut(function() {
+                $(this).remove();
+            });
+        });
     });
 };
 
@@ -74,5 +149,11 @@ taskManager.addEvents = function() {
 
 // DOM ready
 $(function() {
+    $.ajaxSetup({
+        contentType: 'application/json'
+    });
+    
     taskManager.addEvents();
+    taskManager.fetchCategories();
+    taskManager.fetchTasks();
 });
