@@ -23,7 +23,7 @@ taskManager.fetchTasks = function() {
 
 taskManager.buildCategorySelect = function(categories) {
     $.each(categories, function(index, item) {
-        var option = $('<option value="'+item.id+'">'+item.name+'</option>');
+        var option = $('<option>').val(item.id).text(item.name);
         
         $('select[name="category"]').append(option);
     });
@@ -31,9 +31,10 @@ taskManager.buildCategorySelect = function(categories) {
 
 taskManager.buildTaskList = function(tasks) {
     $.each(tasks, function(index, item) {
-        var li = $('<li data-id="'+item.id+'" data-status="'+this.status+'"><a href="#">'+item.name+'</li>');
+        var li = $('<li>').attr('data-id', item.id).attr('data-status', item.status);
+        $('<a>').attr('href', '#').text(item.name).appendTo(li);
         
-        $('.js-taskList ul').append(li);
+        $('.js-taskList').append(li);
     });
 };
 
@@ -51,9 +52,11 @@ taskManager.createCategory = function(category) {
     }).done(function(response) {
         var categoryField = $('select[name="category"]');
         
-        $('<option>').val(category).text(category).appendTo(categoryField);
+        var option = $('<option>').val(response.id).text(response.name).appendTo(categoryField);
+
+        categoryField.append(option);
         
-        categoryField.val(category);
+        categoryField.val(response.id);
     });
 };
  
@@ -70,8 +73,10 @@ taskManager.createTask = function(task, category) {
             category: category
         })
     }).done(function(response) {
-        var li = $('<li data-id="'+response.id+'" data-status="'+response.status+'"><a href="#">'+response.name+'</li>');
-        li.appendTo('.js-taskList ul').hide().fadeIn();
+        var li = $('<li>').attr('data-id', response.id).attr('data-status', response.status);
+        $('<a>').attr('href', '#').text(response.name).appendTo(li);
+    
+        li.appendTo($('.js-taskList')).hide().fadeIn();
     });
 };
 
@@ -120,7 +125,7 @@ taskManager.clickTaskItem = function(e) {
 taskManager.clickRemoveCompleted = function(e) {
     e.preventDefault();
     
-    $('.js-taskList ul li[data-status="2"]').each(function() {
+    $('.js-taskList li[data-status="2"]').each(function() {
         var iteratorContext = this;
         
         var id = $(iteratorContext).attr('data-id');
@@ -142,7 +147,7 @@ taskManager.addEvents = function() {
     
     $('.js-taskForm').on('submit', taskManager.submitTaskForm);
     
-    $('.js-taskList ul').on('click', 'a', taskManager.clickTaskItem);
+    $('.js-taskList').on('click', 'a', taskManager.clickTaskItem);
     
     $('.js-removeCompleted').on('click', taskManager.clickRemoveCompleted);
 };
