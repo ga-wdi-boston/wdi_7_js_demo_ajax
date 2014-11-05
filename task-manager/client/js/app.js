@@ -108,8 +108,8 @@ taskManager.clickTaskItem = function(e) {
     
     var eventContext = this;
     
-    var id = $(this).parent().attr('data-id');
-    var status = ($(this).parent().attr('data-status') === '2') ? 0 : 2;
+    var id = $(eventContext).parent().attr('data-id');
+    var status = ($(eventContext).parent().attr('data-status') === '2') ? 0 : 2;
     
     $.ajax({
         url: 'http://localhost:3000/tasks/' + id,

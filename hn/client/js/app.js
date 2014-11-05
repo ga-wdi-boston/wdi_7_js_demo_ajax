@@ -31,6 +31,37 @@ var Router = Backbone.Router.extend({
                 users: response
             }));
         });
+        
+        $('#content').on('submit', '.js-userForm', function(e) {
+            e.preventDefault();
+            
+            var data = {
+                user: {
+                    username: $(this).find('input[name="username"]').val()
+                }
+            };
+            
+            $.ajax({
+                url: 'http://localhost:3000/users',
+                type: 'POST',
+                data: data
+            }).done(function(response) {
+                console.log(response);
+            });
+        });
+        
+        $('#content').on('click', '.js-deleteUser', function(e) {
+            e.preventDefault();
+            
+            var id = $(this).attr('data-id');
+            
+            $.ajax({
+                url: 'http://localhost:3000/users/'+id,
+                type: 'DELETE'
+            }).done(function(response) {
+                console.log(response);
+            });
+        });
     },
     
     page: function(id) {
