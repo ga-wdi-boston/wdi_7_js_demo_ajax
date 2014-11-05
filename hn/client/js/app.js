@@ -9,6 +9,7 @@ var Router = Backbone.Router.extend({
 
     home: function() {
         var template = Handlebars.compile($("#homeTemplate").html());
+        
         $('#content').html(template({
             name: 'Ella'
         }));
