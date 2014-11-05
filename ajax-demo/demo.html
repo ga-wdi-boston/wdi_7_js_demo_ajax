@@ -30,13 +30,13 @@ $('#container').on('click', '.js-users a', function(e) {
 //     return userList;
 // }
 
-$.get('http://localhost:4567/users/1')
-.done(function(response) {
-    $('#container').html(buildUserList(response));
-})
-.fail(function(jqXHR, textStatus, errorThrown) {
-    $('#container').html(jqXHR.responseText);
-});
+// $.get('http://localhost:4567/users/1')
+// .done(function(response) {
+//     $('#container').html(buildUserList(response));
+// })
+// .fail(function(jqXHR, textStatus, errorThrown) {
+//     $('#container').html(jqXHR.responseText);
+// });
 
 // $.ajax({
 //     url: 'http://localhost:4567/users',
@@ -48,26 +48,26 @@ $.get('http://localhost:4567/users/1')
 //    $('#container').html(jqXHR.responseText);
 // });
 
-var user = {
-    id: 4,
-    name: 'Jorden'
-};
+// var user = {
+//     id: 4,
+//     name: 'Jorden'
+// };
 
-$.ajax({
-    url: 'http://localhost:4567/users',
-    type: 'POST',
-    dataType: 'json',
-    data: JSON.stringify(user)
-}).done(function(response) {
-    console.log(response);
-});
+// $.ajax({
+//     url: 'http://localhost:4567/users',
+//     type: 'POST',
+//     dataType: 'json',
+//     data: JSON.stringify(user)
+// }).done(function(response) {
+//     console.log(response);
+// });
 
-$.ajax({
-    url: 'http://localhost:4567/users/4',
-    type: 'DELETE'
-}).done(function(response) {
-    console.log(response);
-});
+// $.ajax({
+//     url: 'http://localhost:4567/users/4',
+//     type: 'DELETE'
+// }).done(function(response) {
+//     console.log(response);
+// });
 
 // $.post('http://localhost:4567/users', JSON.stringify(user)).done(function(response) {
 //     console.log(response);
