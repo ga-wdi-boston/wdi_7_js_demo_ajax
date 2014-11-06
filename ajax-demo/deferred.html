@@ -26,12 +26,12 @@ deferred.always(function(val) {
 });
 
 setTimeout(function() {
-    deferred.resolve('Hi');
-}, 2000);
+    deferred.resolve('pass go');
+}, 1000);
 
-// setTimeout(function() {
-//     deferred.reject('Hi');
-// }, 2000);
+setTimeout(function() {
+    deferred.reject('may not pass go');
+}, 1000);
 
 // function slow() {
 //     var deferred = $.Deferred();
