@@ -35,44 +35,12 @@
     <div id="content"></div>
 </div>
 
-<script id="homeTemplate" type="text/x-handlebars-template">
-    <h1>Home Page</h1>
-    
-    <p>Hello {{ name }}</p>
-</script>
-
-<script id="aboutTemplate" type="text/x-handlebars-template">
-    <h1>About Page</h1>
-    
-    <p>Hello {{ name }}</p>
-</script>
-
-<script id="usersTemplate" type="text/x-handlebars-template">
-    <h1>Users Page</h1>
-    
-    <ul>
-        {{#each users}}
-            <li>{{ username }} <a class="js-deleteUser" data-id="{{ id }}" href="#">delete</a></li>
-        {{/each}}
-    </ul>
-    
-    <br />
-    
-    <form role="form" class="js-userForm" id="userForm">
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" class="form-control" name="username">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Add User</button>
-    </form>
-</script>
-
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
 <script src="bower_components/backbone/backbone.js"></script>
-<script src="bower_components/handlebars/handlebars.js"></script>
+<script src="bower_components/handlebars/handlebars.runtime.js"></script>
+<script src="templates/templates.js"></script>
 <script src="js/app.js" type="text/javascript"></script>
 
 </body>

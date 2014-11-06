@@ -1,3 +1,5 @@
+// handlebars templates/> templates/templates.js
+
 var Router = Backbone.Router.extend({
     routes: {
         '': 'home',
@@ -8,7 +10,7 @@ var Router = Backbone.Router.extend({
     },
 
     home: function() {
-        var template = Handlebars.compile($("#homeTemplate").html());
+        var template = Handlebars.templates['home'];
         
         $('#content').html(template({
             name: 'Ella'
@@ -16,7 +18,7 @@ var Router = Backbone.Router.extend({
     },
     
     about: function() {
-        var template = Handlebars.compile($("#aboutTemplate").html());
+        var template = Handlebars.templates['about'];
         $('#content').html(template({
             name: 'Ava'
         }));
@@ -27,7 +29,7 @@ var Router = Backbone.Router.extend({
             url: 'http://localhost:3000/users',
             type: 'GET'
         }).done(function(response) {
-            var template = Handlebars.compile($("#usersTemplate").html());
+            var template = Handlebars.templates['users'];
             $('#content').html(template({
                 users: response
             }));
