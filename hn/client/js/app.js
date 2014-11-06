@@ -24,14 +24,14 @@ var Router = Backbone.Router.extend({
     
     users: function() {
         $.ajax({
-            url: 'http://localhost:3000/users',
-            type: 'GET'
-        }).done(function(response) {
-            var template = Handlebars.compile($("#usersTemplate").html());
+            url: 'http://localhost:3000/users',
+            type: 'GET'
+        }).done(function(response) {
+            var template = Handlebars.compile($("#usersTemplate").html());
             $('#content').html(template({
                 users: response
             }));
-        });
+        });
         
         $('#content').on('submit', '.js-userForm', function(e) {
             e.preventDefault();
@@ -43,12 +43,12 @@ var Router = Backbone.Router.extend({
             };
             
             $.ajax({
-                url: 'http://localhost:3000/users',
-                type: 'POST',
-                data: data
-            }).done(function(response) {
+                url: 'http://localhost:3000/users',
+                type: 'POST',
+                data: data
+            }).done(function(response) {
                 console.log(response);
-            });
+            });
         });
         
         $('#content').on('click', '.js-deleteUser', function(e) {
@@ -57,11 +57,11 @@ var Router = Backbone.Router.extend({
             var id = $(this).attr('data-id');
             
             $.ajax({
-                url: 'http://localhost:3000/users/'+id,
-                type: 'DELETE'
-            }).done(function(response) {
+                url: 'http://localhost:3000/users/'+id,
+                type: 'DELETE'
+            }).done(function(response) {
                 console.log(response);
-            });
+            });
         });
     },
     
