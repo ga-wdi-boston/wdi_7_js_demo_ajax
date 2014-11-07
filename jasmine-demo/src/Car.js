@@ -15,5 +15,15 @@ var Car = function() {
             
             callback();
         }, 2000);
+    },
+    
+    this.changeTire = function(tire) {
+        return 'Changing tire ' + tire;
+    },
+    
+    this.changeTires = function() {
+        for (var i = 0; i < 4; i++) {
+            this.changeTire();
+        }
     }
 }

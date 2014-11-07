@@ -2,7 +2,7 @@ describe('Car', function() {
     var car;
     
     beforeEach(function() {
-        car = new Car(); 
+        car = new Car();
     });
     
     describe('color', function() {
@@ -27,13 +27,24 @@ describe('Car', function() {
         beforeEach(function() {
             jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
         });
-        
+
         it('should paint the car blue', function(done) {
             car.paint('blue', function() {
                 expect(car.color).toBe('blue');
-                
+
                 done();
             });
+        });
+    });
+    
+    describe('changeTires()', function() {
+        it('should call changeTire 4 times', function() {
+            var changeTireSpy = spyOn(car, 'changeTire');
+            
+            car.changeTires();
+            
+            expect(changeTireSpy.calls.count()).not.toEqual(5);
+            expect(changeTireSpy.calls.count()).toEqual(4);
         });
     });
 });
