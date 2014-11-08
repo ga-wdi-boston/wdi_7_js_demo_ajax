@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Demo</title>
+</head>
+<body>
+    
+<script type="text/javascript">
+
+// demo 1
+function sayName() {
+	'use strict';
+
+    var privateName = 'Dan';
+};
+
+sayName();
+
+console.log(privateName); // undefined
+
+// demo 2
+(function() {
+	'use strict';
+
+	var privateName = 'Dan';
+}());
+
+console.log(privateName); // undefined
+
+// demo 3
+var Module = function() {
+	'use strict';
+	
+    var privateName = 'Dan';
+
+    return {
+        publicName: privateName
+    };
+};
+
+var m = new Module();
+
+console.log(m.publicName);
+
+</script>
+
+</body>
+</html>
